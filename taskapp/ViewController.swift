@@ -29,6 +29,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.delegate = self
+        searchBar.placeholder = "カテゴリー検索"
+        searchBar.showsCancelButton = true // キャンセルボタン表示を設定
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
@@ -94,8 +97,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.reloadData()
         
     }
+   
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: false)
+        tableView.reloadData()
+    }
     
     
+
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
         
