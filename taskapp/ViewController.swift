@@ -92,6 +92,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         } else {
             let predicate = NSPredicate(format: "category == %@", searchBar.text!)
             taskArray = realm.objects(Task.self).filter(predicate)
+            
         }
         
         tableView.reloadData()
